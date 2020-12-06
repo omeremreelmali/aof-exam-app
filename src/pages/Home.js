@@ -27,11 +27,13 @@ export default function Home() {
   
   return (
     <View style={styles.container}>
-        <Picker>
+      <View style={styles.pickerView}>
+        <Picker style={styles.pickerStyle}>
           { department.map((item)=>{
             return(<Picker.Item label={item.departmentname} />)
           })}
         </Picker>
+      </View> 
     </View>
   );
 }
@@ -45,6 +47,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   pickerStyle: {
-    backgroundColor: '#E16E6E',
+    backgroundColor: '#333',
+    color: 'white'
+  },
+  pickerView: {
+    margin: 20,
+    borderRadius: 10,
+    margin: 20,
+    overflow: 'hidden',
   },
 });

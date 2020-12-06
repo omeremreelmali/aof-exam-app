@@ -1,16 +1,27 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text,TextInput } from 'react-native';
+import SearchBar from 'react-native-search-bar';
 
-const Search = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Search Page</Text>
-    </View>
-  );
-};
+class Search extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
+  render() {
+    return (
+      <View>
+        <TextInput
+        ref="searchBar"
+        placeholder="Search"
+        //onChangeText={...}
+        //onSearchButtonPress={...}
+        //onCancelButtonPress={...}
+        />
+      </View>
+    );
+  }
+}
 
 export default Search;
-
-const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: '#fff', justifyContent: 'center'},
-});

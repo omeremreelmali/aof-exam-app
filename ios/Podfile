@@ -10,6 +10,8 @@ target 'AofSoruApp' do
 
   pod 'react-native-sqlite-storage', :path => '../node_modules/react-native-sqlite-storage'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'AofSoruAppTests' do
     inherit! :complete
     # Pods for testing

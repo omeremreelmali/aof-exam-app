@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   pickerStyle: {
-    backgroundColor: '#333',
+    backgroundColor: '#000',
     color: 'white'
   },
   pickerView: {

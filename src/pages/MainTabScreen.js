@@ -136,7 +136,7 @@ const MainTabScreen = () => (
        />
        <Tab.Screen 
       name="Listlessons" 
-      component={SearchQuestiontackScreen}
+      component={ListLessonstackScreen}
       options={{
         tabBarLabel: 'Ara',
         tabBarIcon: ({ color }) => (

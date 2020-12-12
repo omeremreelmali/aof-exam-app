@@ -5,12 +5,14 @@ export default class Listlessons extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      lessons:[]
     };
   }
 
   render() {
     return (
       <View >
+      <Text>{this.props.depertmantId}</Text>
         <FlatList
          data={[
              {key:'matematik'},

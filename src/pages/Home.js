@@ -10,7 +10,6 @@ export default function Home() {
   const [lessons, setLessons] = useState([]);
   const [department, setDepartment] = useState([]);
   const [selectedDep,setSelectedDep] =useState([]);
-  
   const updateSelectedDep = (item) => {
     setSelectedDep(item);
   }

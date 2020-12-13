@@ -1,24 +1,43 @@
-import React, { Component } from 'react';
-import { View, Text,FlatList,StyleSheet } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, Text ,TouchableOpacity, FlatList,StyleSheet} from 'react-native';
+import { openDatabase } from 'react-native-sqlite-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+let db = openDatabase({name: 'aofQ.db', createFromLocation: 1});
+const Listlessons= ({route}) =>{
 
-const Listlessons= props =>{
- 
-  console.log(props);
+  const [lessons,getLessons] =useState([]);
+  useEffect(  () => {
+    getLesson();
+  },[])
+  
+
+  const getLesson= () =>{
+     db.transaction((tx) => {
+      tx.executeSql('SELECT departments_lessons.lessonid,lessons.lessonname FROM departments_lessons join lessons on lessons.id=departments_lessons.lessonid WHERE departmentid=?', [route.params.depid], (tx, results) => {
+        var temp = [];
+        for (let i = 0; i < results.rows.length; ++i)
+        {
+              temp.push(results.rows.item(i));
+        }
+        getLessons(temp);
+      });
+    });
+    return true;
+  }
+
+
   return (
-    <View >
-    
-          <FlatList
-          data={[
-              {key:'matematik'},
-              {key:'sosyal'},
-              {key:'fen'},
-              {key:'tarih'},
-              {key:'açı'}
-          ]}
-          renderItem={({ item, index}) => <Text style={styles.itemContent}> {item.key}</Text>}
-          />
+    <View>  
+      <FlatList
+        data ={lessons}
+        keyExtractor = { (item,index) => index.toString() }
+        renderItem={({item}) =>  
+          <View style={styles.itemContent}>
+              <Text >{item.lessonname}</Text>
+          </View>      
+        }        
+      />
     </View>
   )
 }

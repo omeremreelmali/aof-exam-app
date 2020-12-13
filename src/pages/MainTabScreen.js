@@ -13,94 +13,125 @@ import Home from './Home';
 import Search from './Search';
 
 const Stack = createStackNavigator();
+
 const HomeStack = createStackNavigator();
-const ProfileStack = createStackNavigator();
 
 const HomeStackScreen =({navigation}) => (
-  <HomeStack.Navigator ScreenOptions={{
-    
-  }}>
+  <HomeStack.Navigator>
+
     <HomeStack.Screen name = "Home" style= "center" component = {Home} options ={{
       title:'ANA SAYFA',
       headerStyle:{
-        backgroundColor:'#fff'
+      backgroundColor:'#fff'
       },
-      
       headerTitleAlign:'center',
       headerTintColor: '#000',
       headerTitleStyle: {
-        fontWeight: 'bold', 
+      fontWeight: 'bold', 
       },
       headerLeft:() =>(
         <Icon.Button name="ios-menu" size={25} iconStyle={{color:'black'}}
         backgroundColor= "#fff" onPress={() => navigation.openDrawer()}></Icon.Button>
       ) 
-    
-  
-       }}/>
-  </HomeStack.Navigator>
-);
-
-const ListLessonstackScreen =({navigation}) => (
-  <HomeStack.Navigator ScreenOptions={{
-    
-  }}>
-    <HomeStack.Screen name = "Listlessons" style= "center" component = {Listlessons} options ={{
-      title:'Dersler',
-      headerStyle:{
-        backgroundColor:'#fff'
-      },
-      
-      headerTitleAlign:'center',
-      headerTintColor: '#000',
-      headerTitleStyle: {
-        fontWeight: 'bold', 
-      },
-      
+     }}/>
      
-       }}/>
-  </HomeStack.Navigator>
-);
-const ListDepartmentstackScreen =({navigation}) => (
-  <HomeStack.Navigator ScreenOptions={{
-    
-  }}>
     <HomeStack.Screen name = "ListDeparman" style= "center" component = {ListDeparman} options ={{
       title:'BÖLÜMLER',
       headerStyle:{
-        backgroundColor:'#fff'
-      },
-      
+      backgroundColor:'#fff'
+      },  
       headerTitleAlign:'center',
       headerTintColor: '#000',
       headerTitleStyle: {
-        fontWeight: 'bold', 
+      fontWeight: 'bold', 
       },
       
-     
-       }}/>
+      
+      }}/>
   </HomeStack.Navigator>
 );
 
+const ListDepartment = createStackNavigator();
+
+
+const ListDepartmentstackScreen =({navigation}) => (
+  <ListDepartment.Navigator>
+      <ListDepartment.Screen name = "ListDeparman" style= "center" component = {ListDeparman} options ={{
+          title:'BÖLÜMLER',
+          headerStyle:{
+          backgroundColor:'#fff'
+          },
+          headerTitleAlign:'center',
+          headerTintColor: '#000',
+          headerTitleStyle: {
+          fontWeight: 'bold', 
+          },    
+        }}/>
+        <ListDepartment.Screen name = "Listlessons" style= "center" component = {Listlessons} options ={{
+          title:'Dersler',
+          headerStyle:{
+          backgroundColor:'#fff'
+          },
+          headerTitleAlign:'center',
+          headerTintColor: '#000',
+          headerTitleStyle: {
+          fontWeight: 'bold', 
+          },
+       }}/>
+  </ListDepartment.Navigator>
+);
+const Listlesson = createStackNavigator();
+
+const ListLessonstackScreen =({navigation}) => (
+  <Listlesson.Navigator ScreenOptions>
+
+        <Listlesson.Screen name = "Listlessons" style= "center" component = {Listlessons} options ={{
+          title:'Dersler',
+          headerStyle:{
+          backgroundColor:'#fff'
+          },
+          headerTitleAlign:'center',
+          headerTintColor: '#000',
+          headerTitleStyle: {
+          fontWeight: 'bold', 
+          },
+        }}/>
+
+        <Listlessons.Screen name = "Search" style= "center" component = {Search} options ={{
+          title:'Soru Ara',
+          headerStyle:{
+          backgroundColor:'#fff'
+          },
+          headerTitleAlign:'center',
+          headerTintColor: '#000',
+          headerTitleStyle: {
+          fontWeight: 'bold', 
+          },
+          }}/>
+
+  </Listlesson.Navigator>
+);
+
+
+
+const SearchQuestions = createStackNavigator();
+
 const SearchQuestiontackScreen =({navigation}) => (
-  <HomeStack.Navigator ScreenOptions={{
-    
-  }}>
-    <HomeStack.Screen name = "Search" style= "center" component = {Search} options ={{
+  <SearchQuestions.Navigator>
+
+    <SearchQuestions.Screen name = "Search" style= "center" component = {Search} options ={{
       title:'Soru Ara',
       headerStyle:{
-        backgroundColor:'#fff'
+      backgroundColor:'#fff'
       },
-      
       headerTitleAlign:'center',
       headerTintColor: '#000',
       headerTitleStyle: {
-        fontWeight: 'bold', 
+      fontWeight: 'bold', 
       },
-      
-     
-       }}/>
-  </HomeStack.Navigator>
+      }}/>
+
+  </SearchQuestions.Navigator>
 );
 
 const Tab = createMaterialBottomTabNavigator();
@@ -128,15 +159,16 @@ const MainTabScreen = () => (
       name="ListDepartment" 
       component={ListDepartmentstackScreen}
       options={{
-        tabBarLabel: 'Derslerim',
+        tabBarLabel: 'Bölümlerim',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="school" color={color} size={26} />
         ),
       }}
        />
+
        <Tab.Screen 
-      name="Listlessons" 
-      component={ListLessonstackScreen}
+      name="Search" 
+      component={SearchQuestiontackScreen}
       options={{
         tabBarLabel: 'Ara',
         tabBarIcon: ({ color }) => (
@@ -144,6 +176,7 @@ const MainTabScreen = () => (
         ),
       }}
        />
+       
   </Tab.Navigator>
 );
 

@@ -15,7 +15,7 @@ const Listlessons= ({route}) =>{
 
   const getLesson= () =>{
      db.transaction((tx) => {
-      tx.executeSql('SELECT departments_lessons.lessonid,lessons.lessonname FROM departments_lessons join lessons on lessons.id=departments_lessons.lessonid WHERE departmentid=?', [route.params.depid], (tx, results) => {
+      tx.executeSql('SELECT departments_lessons.lessonid,lessons.lessonname,lessons.downloaded FROM departments_lessons join lessons on lessons.id=departments_lessons.lessonid WHERE departmentid=?', [route.params.depid], (tx, results) => {
         var temp = [];
         for (let i = 0; i < results.rows.length; ++i)
         {
@@ -27,12 +27,20 @@ const Listlessons= ({route}) =>{
   }
 
   const saveQuestion = async (getLessonId)=>{
-    
-
+    /*db.transaction((tx) => {
+          tx.executeSql('SELECT * FROM questions WHERE lessonid=?', [getLessonId], (tx, results) => {
+            for (let index = 0; index < results.rows.length; index++) {
+              console.log(results.rows.item(index).aoptionname);
+            }  
+          });
+        });
+    */  
     const api = "http://yedisinek.com/deneme.php?lesid="+getLessonId;
        axios.get(api).then((response)=>{
+        db.transaction((tx) => {
+          tx.executeSql('UPDATE lessons SET downloaded=? WHERE id=?', ['1',getLessonId]);
+        });
         response.data.map((item) => {
-
           db.transaction((tx) => {
             tx.executeSql('INSERT INTO questions (questionname,lessonname,answerbame,aoptionname,boptionname,coptionname,doptionname,eoptionname,lessonid,oldidq) VALUES (?,?,?,?,?,?,?,?,?,?)', 
             [item.QuestionName,item.LessonName,item.AnswerName,item.AOption,item.BOption,item.COption,item.DOption,item.EOption,item.id,item.Id]);
@@ -40,18 +48,17 @@ const Listlessons= ({route}) =>{
         });
 
         console.log("Tüm sorular başarıyla kayıt edildi.");
-        /*db.transaction((tx) => {
-          tx.executeSql('SELECT * FROM questions', [], (tx, results) => {
-            for (let index = 0; index < results.rows.length; index++) {
-              console.log(results.rows.item(index).aoptionname);
-            }  
-          });
-        });*/
+        
       });
 
+/*
+    db.transaction((tx) => {
+      tx.executeSql('SELECT * FROM lessons WHERE id=?', [getLessonId], (tx, results) => {
+          console.log(results.rows.item(0).downloaded);
 
-    
-
+      });
+    });
+      */
   }
 
   
@@ -62,25 +69,28 @@ const Listlessons= ({route}) =>{
       <FlatList
         data ={lessons}
         keyExtractor = { (item,index) => index.toString() }
-        renderItem={({item}) =>  
-          
-          <View style={styles.itemContent}>
+        renderItem={({item,index}) => {
+          if(item.downloaded==1){
+            return(
+            <View style={styles.itemContent}>
               <Text style={{flex:3,flexDirection: 'row'}} >{item.lessonname}</Text>
               <View style={{flex:1,flexDirection: 'row'}}>
-
-                { 
-                  item.downloaded ? (<TouchableOpacity style={styles.button}><MaterialCommunityIcons name="shuffle-variant"  size={30} /></TouchableOpacity> ) :(<View></View>)
-                }
-                
-                { 
-                  !item.downloaded ? (<TouchableOpacity onPress={() => {saveQuestion(item.lessonid);}} style={styles.button}><MaterialCommunityIcons name="download-box"  size={30} /></TouchableOpacity> ) :(<View></View>)
-                }
-                { 
-                  item.downloaded ? (<TouchableOpacity style={styles.button}><MaterialCommunityIcons name="card-search"  size={30} /></TouchableOpacity> ) :(<View></View>)
-                }
-                
+                <TouchableOpacity style={styles.button}><MaterialCommunityIcons name="shuffle-variant"  size={30} /></TouchableOpacity> 
+                <TouchableOpacity style={styles.button}><MaterialCommunityIcons name="card-search"  size={30} /></TouchableOpacity> 
               </View>
-          </View>      
+            </View>)
+          }
+          else if(item.downloaded==0){
+            return(
+            <View style={styles.itemContent}>
+                <Text style={{flex:3,flexDirection: 'row'}} >{item.lessonname}</Text>
+                <View style={{flex:1,flexDirection: 'row'}}>
+                  <TouchableOpacity onPress={() => {saveQuestion(item.lessonid);}} style={styles.button}><MaterialCommunityIcons name="download-box"  size={30} /></TouchableOpacity>
+                </View>
+            </View>)
+          }
+             
+          }
         }        
       />
     </View>

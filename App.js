@@ -27,7 +27,6 @@ export default function App (){
         <Drawer.Screen name="Menutab" component={MainTabScreen} />
         <Drawer.Screen name="Derslerim" component={Listlessons} />  
         
-        
       </Drawer.Navigator>
     </NavigationContainer>
   );

@@ -18,6 +18,9 @@ class Search extends Component {
         //onChangeText={...}
         //onSearchButtonPress={...}
         //onCancelButtonPress={...}
+        //Search sayfasından yönlendirirken 
+        // onPress={() => navigation.navigate('questionsscreen', {idtype})}
+        // 
         />
       </View>
     );

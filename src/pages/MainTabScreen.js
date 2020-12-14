@@ -11,6 +11,7 @@ import Listlessons from './Listlessons';
 import ListDeparman from './ListDeparman';
 import Home from './Home';
 import Search from './Search';
+import questionsscreen from './questionsscreen';
 
 const Stack = createStackNavigator();
 
@@ -130,9 +131,44 @@ const SearchQuestiontackScreen =({navigation}) => (
       fontWeight: 'bold', 
       },
       }}/>
-
+      
+      <SearchQuestions.Screen name = "questionsscreen" style= "center" component = {questionsscreen} options ={{
+      title:'SORULAR',
+      headerStyle:{
+      backgroundColor:'#fff'
+      },
+      headerTitleAlign:'center',
+      headerTintColor: '#000',
+      headerTitleStyle: {
+      fontWeight: 'bold', 
+      },
+      }}/>
+      
   </SearchQuestions.Navigator>
 );
+
+const questions = createStackNavigator();
+
+const questionsStackScreen = ({navigation}) => {
+   
+  <questions.Navigator>
+
+      <questions.Screen name = "questionsscreen" style= "center" component = {questionsscreen} options ={{
+      title:'SORULAR',
+      headerStyle:{
+      backgroundColor:'#fff'
+      },
+      headerTitleAlign:'center',
+      headerTintColor: '#000',
+      headerTitleStyle: {
+      fontWeight: 'bold', 
+      },
+      }}/>
+     
+  </questions.Navigator>
+
+}
+
 
 const Tab = createMaterialBottomTabNavigator();
 

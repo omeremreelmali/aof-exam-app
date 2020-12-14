@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {ActivityIndicator, StyleSheet,TouchableOpacity ,Text, View} from 'react-native';
 import {Picker} from '@react-native-community/picker';
 import { openDatabase } from 'react-native-sqlite-storage';
-import axios from "axios";
 import { block } from 'react-native-reanimated';
 let db = openDatabase({name: 'aofQ.db', createFromLocation: 1});
 

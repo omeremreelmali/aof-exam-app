@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text ,TouchableOpacity, FlatList,StyleSheet} from 'react-native';
+import { View, Modal,Text ,TouchableOpacity, Alert,FlatList,StyleSheet} from 'react-native';
 import { openDatabase } from 'react-native-sqlite-storage';
 import axios from "axios";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 let db = openDatabase({name: 'aofQ.db', createFromLocation: 1});
 
-const Listlessons= ({route}) =>{
+const Listlessons= ({route,navigation}) =>{
 
   const [lessons,getLessons] =useState([]);
+  const [modalView,setModalView] =useState(false);
   useEffect(  () => {
     getLesson();
   },[])
@@ -35,6 +36,14 @@ const Listlessons= ({route}) =>{
           });
         });
     */  
+    setModalView(true);
+
+    setTimeout(() => {
+      getLesson();
+      setModalView(false);
+    }, 9000);
+    
+
     const api = "http://yedisinek.com/deneme.php?lesid="+getLessonId;
        axios.get(api).then((response)=>{
         db.transaction((tx) => {
@@ -62,10 +71,33 @@ const Listlessons= ({route}) =>{
   }
 
   
+  
 
 
   return (
     <View>  
+
+      <Modal
+          animationType="slide"
+          transparent = {true}
+          visible={modalView}
+          onRequestClose={() => {
+            console.log('Modal has been closed.');
+          }}>
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              backgroundColor: 'white',
+              justifyContent: 'center',
+              margin: 25,
+            }}>
+            <Text style={{fontSize: 16, color: 'black'}}>
+              Derse ait sorular indiriliyor lütfen bekleyin..
+            </Text>
+          </View>
+        </Modal>
+    
       <FlatList
         data ={lessons}
         keyExtractor = { (item,index) => index.toString() }
@@ -75,8 +107,7 @@ const Listlessons= ({route}) =>{
             <View style={styles.itemContent}>
               <Text style={{flex:3,flexDirection: 'row'}} >{item.lessonname}</Text>
               <View style={{flex:1,flexDirection: 'row'}}>
-                <TouchableOpacity style={styles.button}><MaterialCommunityIcons name="shuffle-variant"  size={30} /></TouchableOpacity> 
-                <TouchableOpacity style={styles.button}><MaterialCommunityIcons name="card-search"  size={30} /></TouchableOpacity> 
+                <TouchableOpacity onPress={() => {navigation.navigate('Search')}} style={styles.button}><MaterialCommunityIcons name="card-search"  size={30} /></TouchableOpacity> 
               </View>
             </View>)
           }

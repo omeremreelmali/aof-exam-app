@@ -12,6 +12,8 @@ import ListDeparman from './src/pages/ListDeparman';
 import MainTabScreen from './src/pages/MainTabScreen';
 import SideMenu from './src/pages/SideMenu';
 import { DefaultTheme, DarkTheme } from '@react-navigation/native';
+import AnimatedLoader from "react-native-animated-loader";
+import AnimatedSplash from "react-native-animated-splash-screen";
 
 const Stack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -20,8 +22,13 @@ const Drawer = createDrawerNavigator();
 
 
 
-export default function App (){
+export default class App extends React.Component{
+  
+
+  render() {
+    
   return (
+    
     <NavigationContainer theme={DefaultTheme}>
        <Drawer.Navigator  drawerContent={ props => <SideMenu {...props} /> }>
         <Drawer.Screen name="Menutab" component={MainTabScreen} />
@@ -29,7 +36,9 @@ export default function App (){
         
       </Drawer.Navigator>
     </NavigationContainer>
+
   );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -40,5 +49,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
   },
+  lottie: {
+    width: 100,
+    height: 100
+  }
 });
 

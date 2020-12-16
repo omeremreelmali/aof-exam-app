@@ -3,9 +3,11 @@ import { View, Modal,Text ,TouchableOpacity, Alert,FlatList,StyleSheet} from 're
 import { openDatabase } from 'react-native-sqlite-storage';
 import axios from "axios";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AnimatedLoader from "react-native-animated-loader";
 let db = openDatabase({name: 'aofQ.db', createFromLocation: 1});
 
 const Listlessons= ({route,navigation}) =>{
+  
 
   const [lessons,getLessons] =useState([]);
   const [modalView,setModalView] =useState(false);
@@ -75,28 +77,14 @@ const Listlessons= ({route,navigation}) =>{
 
 
   return (
-    <View>  
-
-      <Modal
-          animationType="slide"
-          transparent = {true}
-          visible={modalView}
-          onRequestClose={() => {
-            console.log('Modal has been closed.');
-          }}>
-          <View
-            style={{
-              flex: 1,
-              alignItems: 'center',
-              backgroundColor: 'white',
-              justifyContent: 'center',
-              margin: 25,
-            }}>
-            <Text style={{fontSize: 16, color: 'black'}}>
-              Derse ait sorular indiriliyor lütfen bekleyin..
-            </Text>
-          </View>
-        </Modal>
+    <View >   
+       <AnimatedLoader
+          visible = {modalView}
+          overlayColor="rgba(255,255,255,0.75)"
+          source={require("../../assets/loading.json")}
+          animationStyle={styles.lottie}
+          speed={1}
+        /> 
     
       <FlatList
         data ={lessons}
@@ -131,17 +119,24 @@ const Listlessons= ({route,navigation}) =>{
 const styles =StyleSheet.create({
     itemContent:{
       width:'100%',
-      color: '#fff',
+      color: '#000',
       borderBottomWidth: 1,
       marginTop:3,
       padding:10,
       borderBottomColor:'#333',
       flex: 1, 
-      flexDirection: 'row'
+      flexDirection: 'row',
+      
+      
     },
     button: {
       alignItems: "center",
+      
     },
+    lottie: {
+      width: 100,
+      height: 100
+    }
     
 })
 export default Listlessons;

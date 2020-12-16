@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View,StyleSheet,Dimensions,} from 'react-native';
+import {View,StyleSheet,Dimensions,Image} from 'react-native';
 
 import {Avatar,Title,Caption,Paragraph,Drawer,Text,TouchableRipple,Switch} from 'react-native-paper';
 import {DrawerContentScrollView,DrawerItem} from '@react-navigation/drawer';
@@ -23,12 +23,12 @@ const SideMenu = (props) => {
             <DrawerContentScrollView {...props}> 
             
                 <View style={styles.userInfoSection}>
-                    <View style={{flexDirection:'row',marginTop: 15}}>
+                    <View style={{flexDirection:'column',marginTop: 45}}>
                      
-                        <View style={{marginLeft:15, flexDirection:'column'}}>
+                        <View style={{marginLeft:15, flexDirection:'row'}}>
                         
-                            <Title style={styles.title}>APPLİCATİON NAME(LOGO)</Title>
-                          
+                            <Title style={styles.title}>AÖF BANKASI</Title>
+                            
                         </View>
                     </View>
                     <View style={styles.row}>
@@ -43,6 +43,7 @@ const SideMenu = (props) => {
                     </View>
                 </Drawer.Section>
                 <Drawer.Section>
+                
                     <DrawerItem 
                         icon = { ()=> ( <Icon name="home-outline" style={{fontSize:2.8*vh,color:'black'}} />  ) } 
                         label="ANA SAYFA"
@@ -54,15 +55,11 @@ const SideMenu = (props) => {
                         label="iNDİRİLENLER"
                         onPress={ ()=>{props.navigation.navigate('ListDepartment')} }
                     />
-                     <DrawerItem 
-                        icon = { ()=> ( <Icon name="timeline-text-outline" style={{fontSize:2.8*vh,color:'black'}} />  ) } 
-                        label="SINAV YAP"
-                        onPress={ ()=>{props.navigation.navigate('RandomQuestions')} }
-                    />
+                     
                      <DrawerItem 
                         icon = { ()=> ( <Icon name="toy-brick-search-outline" style={{fontSize:2.8*vh,color:'black'}} />  ) } 
                         label="SORU ARA"
-                        onPress={ ()=>{props.navigation.navigate('Listlessons')} }
+                        onPress={ ()=>{props.navigation.navigate('Search')} }
                     />
                    
                 </Drawer.Section>

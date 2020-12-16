@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, StyleSheet,TouchableOpacity ,Text, View} from 'react-native';
+import {ActivityIndicator, StyleSheet,TouchableOpacity ,Text, View,ImageBackground} from 'react-native';
 import {Picker} from '@react-native-community/picker';
 import { openDatabase } from 'react-native-sqlite-storage';
 import { block } from 'react-native-reanimated';
@@ -34,7 +34,7 @@ export default function Home() {
   }, []);
   
   return (
-    <View style={styles.container}>
+    <ImageBackground source={require('./assets/background.jpg')} style={styles.container}>
       <View style={styles.pickerView}>
         <Picker 
         selectedValue = {selectedDep}
@@ -49,7 +49,7 @@ export default function Home() {
         </TouchableOpacity>
 
       </View> 
-    </View>
+    </ImageBackground>
   );
 }
 
@@ -60,14 +60,20 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 20,
     overflow: 'hidden',
+    alignItems:'center'
   },
   pickerStyle: {
     backgroundColor: '#000',
-    color: 'white'
+    color: 'white',
+    alignItems:'center',
+    alignContent:'flex-start',
+    
+    
+    
   },
   button: {
     alignItems: "center",
-    backgroundColor: "#ffe413",
+    backgroundColor: "white",
     padding: 10
   },
   pickerView: {

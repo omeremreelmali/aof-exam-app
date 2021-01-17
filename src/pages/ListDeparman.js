@@ -4,6 +4,9 @@ import { openDatabase } from 'react-native-sqlite-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 let db = openDatabase({name: 'aofQ.db', createFromLocation: 1});
+import { BannerAd, BannerAdSize} from '@react-native-firebase/admob';
+
+const BannerCode = (Platform.OS == 'android') ? 'ca-app-pub-8483958074876075/3179944916' : 'ca-app-pub-8483958074876075/8615888829';
 
 export default function ListDeparman({navigation}) {
   const [department,getDepartment]= useState([]);
@@ -35,6 +38,16 @@ export default function ListDeparman({navigation}) {
             </View>
           }
         />
+          <View style={{margintop:15,justifyContent:'flex-end'}}>     
+           <BannerAd
+              unitId={BannerCode}
+              size={BannerAdSize.FULL_BANNER}
+              onAdFailedToLoad={(e)=>console.log(e)}
+              requestOptions={{
+              requestNonPersonalizedAdsOnly: true,
+              }}
+            />  
+        </View>
         
       </View>
   )

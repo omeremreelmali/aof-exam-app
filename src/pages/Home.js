@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, StyleSheet,TouchableOpacity ,Text, View,ImageBackground} from 'react-native';
+import {ActivityIndicator, StyleSheet,TouchableOpacity ,Text, View,ImageBackground,Platform} from 'react-native';
 import {Picker} from '@react-native-community/picker';
 import { openDatabase } from 'react-native-sqlite-storage';
 import { block } from 'react-native-reanimated';
 let db = openDatabase({name: 'aofQ.db', createFromLocation: 1});
+import { BannerAd, BannerAdSize, TestIds } from '@react-native-firebase/admob';
+
+const BannerCode = (Platform.OS == 'android') ? 'ca-app-pub-8483958074876075/3179944916' : 'ca-app-pub-8483958074876075/8615888829';
+
 
 export default function Home() {
   const [lessons, setLessons] = useState([]);
@@ -47,8 +51,19 @@ export default function Home() {
         <TouchableOpacity onPress={onPress} style={styles.button}>
           <Text>Bölüm Ekle</Text>
         </TouchableOpacity>
-
+    
+   
       </View> 
+      <View style={{margintop:15,justifyContent:'flex-end'}}>     
+           <BannerAd
+              unitId={BannerCode}
+              size={BannerAdSize.FULL_BANNER}
+              onAdFailedToLoad={(e)=>console.log(e)}
+              requestOptions={{
+              requestNonPersonalizedAdsOnly: true,
+              }}
+            />  
+    </View>
     </ImageBackground>
   );
 }

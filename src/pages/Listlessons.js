@@ -5,6 +5,9 @@ import axios from "axios";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AnimatedLoader from "react-native-animated-loader";
 let db = openDatabase({name: 'aofQ.db', createFromLocation: 1});
+import { BannerAd, BannerAdSize} from '@react-native-firebase/admob';
+
+const BannerCode = (Platform.OS == 'android') ? 'ca-app-pub-8483958074876075/3179944916' : 'ca-app-pub-8483958074876075/8615888829';
 
 const Listlessons= ({route,navigation}) =>{
   
@@ -101,7 +104,7 @@ const Listlessons= ({route,navigation}) =>{
           }
           else if(item.downloaded==0){
             return(
-            <View style={styles.itemContent}>
+              <View style={styles.itemContent}>
                 <Text style={{flex:3,flexDirection: 'row'}} >{item.lessonname}</Text>
                 <View style={{flex:1,flexDirection: 'row'}}>
                   <TouchableOpacity onPress={() => {saveQuestion(item.lessonid);}} style={styles.button}><MaterialCommunityIcons name="download-box"  size={30} /></TouchableOpacity>
@@ -112,6 +115,17 @@ const Listlessons= ({route,navigation}) =>{
           }
         }        
       />
+
+        <View style={{margintop:15,justifyContent:'flex-end'}}>     
+           <BannerAd
+              unitId={BannerCode}
+              size={BannerAdSize.FULL_BANNER}
+              onAdFailedToLoad={(e)=>console.log(e)}
+              requestOptions={{
+              requestNonPersonalizedAdsOnly: true,
+              }}
+            />  
+        </View>
     </View>
   )
 }

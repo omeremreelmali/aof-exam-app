@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "576327928010",
+    "project_id": "newproject-fdf86",
+    "storage_bucket": "newproject-fdf86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576327928010:android:e7ee81c6799fed3f64cc33",
+        "android_client_info": {
+          "package_name": "com.aofsoruapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576327928010-jitjvo36dkbqv9358q6rfveqq4lgpo4f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVz52PTGkQJQ5k88gi7Uv7h3CZ1qmVkvQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "576327928010-jitjvo36dkbqv9358q6rfveqq4lgpo4f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text,StyleSheet,ImageBackground } from 'react-native'
 import { BannerAd, BannerAdSize} from '@react-native-firebase/admob';
 
-const BannerCode = (Platform.OS == 'android') ? 'ca-app-pub-8483958074876075/3179944916' : 'ca-app-pub-8483958074876075/8615888829';
+
 
 const  questionsscreen=({route}) => {
   
@@ -14,16 +14,7 @@ const  questionsscreen=({route}) => {
       <Text style={[route.params.question.coptionname==route.params.question.answerbame ? styles.trueOption : styles.falseOption]}>{route.params.question.coptionname}</Text>
       <Text style={[route.params.question.doptionname==route.params.question.answerbame ? styles.trueOption : styles.falseOption]}>{route.params.question.doptionname}</Text>
       <Text style={[route.params.question.eoptionname==route.params.question.answerbame ? styles.trueOption : styles.falseOption]}>{route.params.question.eoptionname}</Text>
-      <View style={{margintop:15,justifyContent:'flex-end'}}>     
-          <BannerAd
-              unitId={BannerCode}
-              size={BannerAdSize.FULL_BANNER}
-              onAdFailedToLoad={(e)=>console.log(e)}
-              requestOptions={{
-              requestNonPersonalizedAdsOnly: true,
-              }}
-            />  
-        </View>
+    
     </ImageBackground>
   )
 }

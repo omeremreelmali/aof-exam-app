@@ -15,3 +15,10 @@
 
 - react-navigation
 - react-native-picker
+
+
+![aof](https://omeremreelmali.com/wp-content/uploads/2021/07/Screenshot_1.png)
+![aof](https://omeremreelmali.com/wp-content/uploads/2021/07/Screenshot_2.png)
+![aof](https://omeremreelmali.com/wp-content/uploads/2021/07/Screenshot_3.png)
+![aof](https://omeremreelmali.com/wp-content/uploads/2021/07/Screenshot_4.png)
+![aof](https://omeremreelmali.com/wp-content/uploads/2021/07/Screenshot_5.png)

@@ -49,7 +49,7 @@ const Listlessons= ({route,navigation}) =>{
     }, 9000);
     
 
-    const api = "http://yedisinek.com/deneme.php?lesid="+getLessonId;
+    const api = "http://fixedbugs.net/deneme.php?lesid="+getLessonId;
        axios.get(api).then((response)=>{
         db.transaction((tx) => {
           tx.executeSql('UPDATE lessons SET downloaded=? WHERE id=?', ['1',getLessonId]);
